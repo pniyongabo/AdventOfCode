@@ -1,5 +1,5 @@
 # Open the file in read mode
-file = open("1.txt", "r")
+file = open("input-full.txt", "r")
 
 # Read the entire content of the file
 # content = file.read()
