@@ -1,4 +1,4 @@
-def find_repeated_digit_sequences(start, end):
+def find_repeated_digit_sequences_part_1(start, end):
     """
     Find numbers with some sequence of digits repeated twice consecutively.
     For example: 11 (1 repeated), 1212 (12 repeated), 123123 (123 repeated)
@@ -14,6 +14,31 @@ def find_repeated_digit_sequences(start, end):
             if length % sub_len == 0 and length // sub_len == 2:
                 # Check if first half equals second half
                 if s[:sub_len] == s[sub_len:sub_len * 2]:
+                    result.append(num)
+                    break
+
+    return result
+
+
+def find_repeated_digit_sequences_part_2(start, end):
+    """
+    Find numbers with some sequence of digits repeated twice consecutively.
+    For example: 11 (1 repeated), 1212 (12 repeated), 123123 (123 repeated)
+    """
+    result = []
+
+    for num in range(start, end + 1):
+        s = str(num)
+        length = len(s)
+
+        # Try all possible substring lengths (from 1 to half the string length)
+        for sub_len in range(1, length // 2 + 1):
+            if length % sub_len == 0:
+                # Check if the string is made of repetitions of the substring
+                pattern = s[:sub_len]
+                repetitions = length // sub_len
+
+                if repetitions >= 2 and pattern * repetitions == s:
                     result.append(num)
                     break
 
@@ -51,7 +76,7 @@ def process_all_ranges(ranges):
     all_matches = []
 
     for start, end in ranges:
-        matches = find_repeated_digit_sequences(start, end)
+        matches = find_repeated_digit_sequences_part_2(start, end)
         all_matches.extend(matches)
 
     return all_matches
